@@ -1,4 +1,26 @@
+.tab-container {
+  padding-top: 8px;
+  margin: 8px;
+}
+
+.clear-button {
+  margin: 8px;
+}
+
 .cron-element-controls {
   display: flex;
+  margin: 8px;
+}
+
+.cron-element-select {
+  padding-left: 16px;
+  align-self: center;
+}
+
+.cron-input {
+
+}
+
+.cron-element-labels {
   margin: 8px;
 }

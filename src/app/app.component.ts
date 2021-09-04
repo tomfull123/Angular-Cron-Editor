@@ -10,4 +10,6 @@ export class AppComponent {
 
   cron = "* * * * *";
 
+  selectedCronElementIndex?: number;
+
 }

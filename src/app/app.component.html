@@ -1,3 +1,4 @@
-<app-cron-editor [(cron)]="cron"></app-cron-editor>
+<app-cron-editor [(cron)]="cron" (selectedCronElementIndexChange)="selectedCronElementIndex = $event"></app-cron-editor>
 
-<span>Cron: {{cron}}</span>
+<div>Cron: {{cron}}</div>
+<div>{{selectedCronElementIndex}}</div>
