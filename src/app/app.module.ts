@@ -6,6 +6,7 @@ import {CronDescriptionComponent} from './presentation/cron-description/cron-des
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatTabsModule} from "@angular/material/tabs";
 import {CronElementModeSelectorComponent} from './presentation/cron-element-mode-selector/cron-element-mode-selector.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {CronElementModeSelectorComponent} from './presentation/cron-element-mode
   imports: [
     BrowserModule,
     MatButtonToggleModule,
-    MatTabsModule
+    MatTabsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
