@@ -16,7 +16,7 @@ export class CronElementModeSelectorComponent implements OnInit {
 
   @Input()
   set mode(mode: CronElementMode) {
-    if(this._mode !== mode) {
+    if (this._mode !== mode) {
       this._mode = mode;
       this.modeChange.emit(mode);
     }
