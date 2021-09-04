@@ -1,0 +1,1 @@
+<mat-checkbox *ngFor="let day of daysOfTheWeek" [value]="day.value" (change)="onChange($event, day.value)">{{day.label}}</mat-checkbox>
