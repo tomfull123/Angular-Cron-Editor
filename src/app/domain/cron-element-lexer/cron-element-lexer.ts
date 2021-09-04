@@ -35,7 +35,7 @@ export class CronElementLexer {
   }
 
   private isNotComma(char: string): boolean {
-    return !this.isComma(char);
+    return char !== ',';
   }
 
   private readComma(): CronElementToken {
