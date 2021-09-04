@@ -1,0 +1,14 @@
+.label {
+  padding-right: 16px;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+}
+
+.selected {
+  color: green;
+}
+
+.invalid {
+  color: red;
+}
