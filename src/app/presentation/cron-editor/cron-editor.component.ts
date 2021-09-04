@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CronElementMode} from "../cron-element-mode-selectorx/cron-element-mode-button-selector.component";
+import {CronElementMode} from "../cron-element-mode-selector/cron-element-mode-selector.component";
 
 @Component({
   selector: 'app-cron-editor',
