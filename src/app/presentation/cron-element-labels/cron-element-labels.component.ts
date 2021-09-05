@@ -16,14 +16,14 @@ export class CronElementLabelsComponent implements OnInit {
 
   CronElementIndex = CronElementIndex;
 
-  constructor(private cronElementParser: CronElementParser) {
+  constructor() {
   }
 
   ngOnInit(): void {
   }
 
   getLabelClass(elementIndex: CronElementIndex) {
-    if (!this.cronElementParser.isCronElementValid(elementIndex, this.cron)) return 'invalid';
+    if (!CronElementParser.isCronElementValid(elementIndex, this.cron)) return 'invalid';
     return this.selectedCronElementIndex === elementIndex ? 'selected' : '';
   }
 }
