@@ -107,7 +107,7 @@ export class CronEditorComponent implements OnInit {
   }
 
   set cronInputCursorPosition(cronInputCursorPosition) {
-    if(this._cronInputCursorPosition !== cronInputCursorPosition) {
+    if (this._cronInputCursorPosition !== cronInputCursorPosition) {
       this._cronInputCursorPosition = cronInputCursorPosition;
       this.updateSelectedCronElementIndexChange();
     }
@@ -119,7 +119,7 @@ export class CronEditorComponent implements OnInit {
   dayOfMonthMode = CronElementMode.Every;
   monthMode = CronElementMode.Every;
 
-  constructor(private cronElementParser: CronElementParser) {
+  constructor() {
   }
 
   ngOnInit(): void {
@@ -127,7 +127,10 @@ export class CronEditorComponent implements OnInit {
   }
 
   private getCronElementValues(cronIndex: number): string[] {
-    const cronElement = this.cronElementParser.parseCronElement(this.cron, cronIndex)?.join('');
+    const cronElement = CronElementParser.parseCronElement(this.cron, cronIndex)
+      ?.filter(t => t.valid)
+      ?.map(t => t.value)
+      ?.join('');
     if (cronElement == null || cronElement === '*') return [];
     const valueList = cronElement.split(',').filter(v => v !== '');
     return valueList.map(v => {

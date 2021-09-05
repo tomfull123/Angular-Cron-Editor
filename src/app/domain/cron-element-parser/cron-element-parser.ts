@@ -1,6 +1,6 @@
 import {CronElementToken} from "../cron-element-token/cron-element-token";
 import {CronElementLexer} from "../cron-element-lexer/cron-element-lexer";
-import {Injectable} from "@angular/core";
+import {CronTokenValidator} from "../cron-token-validator/cron-token-validator";
 
 export enum CronElementIndex {
   Minute = 0,
@@ -10,33 +10,27 @@ export enum CronElementIndex {
   Month = 3
 }
 
-@Injectable({
-  providedIn: 'root'
-})
 export class CronElementParser {
 
-  isCronElementValid(elementIndex: CronElementIndex, cron?: string): boolean {
-    if(cron === null) return false;
-    const cronElements = cron!.split(' ');
-    if(elementIndex >= cronElements.length) return false;
-    const cronElement = cronElements[elementIndex];
-    if(cronElement === '') return false;
-    const parsedCronElement = this.parseCronElement(cron!, elementIndex)?.join('');
-    return cronElement === parsedCronElement;
+  static isCronElementValid(elementIndex: CronElementIndex, cron?: string): boolean {
+    if (cron === null) return false;
+    const cronElementTokens = this.parseCronElement(cron!, elementIndex);
+    return (!cronElementTokens?.some(t => !t.valid)) ?? false;
   }
 
-  parseCronElement(cron: string, elementIndex: CronElementIndex): string[] | undefined {
+  static parseCronElement(cron: string, elementIndex: CronElementIndex): CronElementToken[] | undefined {
     const cronElements = cron.split(' ');
 
     if (elementIndex >= cronElements.length) return;
     const cronElement = cronElements[elementIndex];
+    //if (cronElement === '') return false;
 
     const tokens = this.parseTokens(cronElement)
 
-    return tokens.map(t => t.value);
+    return CronTokenValidator.validateTokens(tokens, elementIndex);
   }
 
-  private parseTokens(cronElement: string): CronElementToken[] {
+  private static parseTokens(cronElement: string): CronElementToken[] {
     const lexer = new CronElementLexer(cronElement);
     const tokens = [];
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-cron-description',
@@ -7,7 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CronDescriptionComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  cron?: string;
+
+  @Input()
+  selectedCronElementIndex?: number;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

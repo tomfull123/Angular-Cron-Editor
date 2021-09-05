@@ -1,10 +1,29 @@
 import {CronElementToken} from "../cron-element-token/cron-element-token";
+import {CronElementIndex} from "../cron-element-parser/cron-element-parser";
 
 export class CronTokenValidator {
 
-  static validateTokens(tokens: CronElementToken[], minValue: number, maxValue: number): CronElementToken[] {
+  static CRON_ELEMENT_MIN_VALUES = {
+    [CronElementIndex.Minute]: 0,
+    [CronElementIndex.Hour]: 0,
+    [CronElementIndex.DayOfMonth]: 1,
+    [CronElementIndex.Month]: 1,
+    [CronElementIndex.DayOfWeek]: 0
+  };
+  static CRON_ELEMENT_MAX_VALUES = {
+    [CronElementIndex.Minute]: 59,
+    [CronElementIndex.Hour]: 23,
+    [CronElementIndex.DayOfMonth]: 31,
+    [CronElementIndex.Month]: 12,
+    [CronElementIndex.DayOfWeek]: 6
+  };
+
+  static validateTokens(tokens: CronElementToken[], elementIndex: CronElementIndex): CronElementToken[] {
+    const minValue = this.CRON_ELEMENT_MIN_VALUES[elementIndex];
+    const maxValue = this.CRON_ELEMENT_MAX_VALUES[elementIndex]
+
     for (let i = 0; i < tokens.length; i++) {
-      tokens[i].valid = CronTokenValidator.isTokenValid(tokens, tokens[i], i, minValue, maxValue);
+      tokens[i].valid = this.isTokenValid(tokens, tokens[i], i, minValue, maxValue);
       const isFirstToken = i === 0;
       // We have a previous token and the current token is invalid
       if (!isFirstToken && !tokens[i].valid) {
@@ -55,7 +74,7 @@ export class CronTokenValidator {
 
   private static isValidValue(value: string, minValue?: number, maxValue?: number): boolean {
     if (value === '*') return true;
-    return CronTokenValidator.isValidNumberValue(value, minValue, maxValue);
+    return this.isValidNumberValue(value, minValue, maxValue);
   }
 
 }
