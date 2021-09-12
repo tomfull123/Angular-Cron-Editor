@@ -1,14 +1,6 @@
 import {CronElementToken} from "../cron-element-token/cron-element-token";
 import {CronElementLexer} from "../cron-element-lexer/cron-element-lexer";
-import {CronTokenValidator} from "../cron-token-validator/cron-token-validator";
-
-export enum CronElementIndex {
-  Minute = 0,
-  Hour = 1,
-  DayOfWeek = 4,
-  DayOfMonth = 2,
-  Month = 3
-}
+import {CronElementIndex, CronTokenValidator} from "../cron-token-validator/cron-token-validator";
 
 export class CronElementParser {
 

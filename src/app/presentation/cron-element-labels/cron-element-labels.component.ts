@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CronElementIndex, CronElementParser} from "../../domain/cron-element-parser/cron-element-parser";
+import {CronElementIndex} from 'src/app/domain/cron-token-validator/cron-token-validator';
+import {CronElementParser} from "../../domain/cron-element-parser/cron-element-parser";
 
 @Component({
   selector: 'app-cron-element-labels',

@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CronElementMode} from "../cron-element-mode-selector/cron-element-mode-selector.component";
-import {CronElementIndex, CronElementParser} from "../../domain/cron-element-parser/cron-element-parser";
+import {CronElementParser} from "../../domain/cron-element-parser/cron-element-parser";
 import {InputType} from "../multi-select/multi-select.component";
+import {CronElementIndex} from 'src/app/domain/cron-token-validator/cron-token-validator';
 
 @Component({
   selector: 'app-cron-editor',

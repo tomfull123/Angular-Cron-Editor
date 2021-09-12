@@ -1,1 +1,8 @@
-<p>cron-description works!</p>
+<div *ngIf="isCronValid()">
+  At
+  <span [ngClass]="getDescriptionClass(CronElementIndex.Minute)">{{buildMinuteDescription()}}</span>
+  <span [ngClass]="getDescriptionClass(CronElementIndex.Hour)">{{buildHourDescription()}}</span>
+  <span [ngClass]="getDescriptionClass(CronElementIndex.DayOfWeek)">{{buildDayOfWeekDescription()}}</span>
+  <span [ngClass]="getDescriptionClass(CronElementIndex.DayOfMonth)">{{buildDayOfMonthDescription()}}</span>
+  <span [ngClass]="getDescriptionClass(CronElementIndex.Month)">{{buildMonthDescription()}}</span>
+</div>
