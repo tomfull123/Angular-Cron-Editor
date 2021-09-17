@@ -5,8 +5,9 @@ import {CronElementIndex, CronTokenValidator} from "../cron-token-validator/cron
 export class CronElementParser {
 
   static isCronElementValid(elementIndex: CronElementIndex, cron?: string): boolean {
-    if (cron === null) return false;
+    if (cron == null) return false;
     const cronElementTokens = this.parseCronElement(cron!, elementIndex);
+    if ((cronElementTokens?.length ?? 0) === 0) return false;
     return (!cronElementTokens?.some(t => !t.valid)) ?? false;
   }
 
@@ -15,7 +16,7 @@ export class CronElementParser {
 
     if (elementIndex >= cronElements.length) return;
     const cronElement = cronElements[elementIndex];
-    //if (cronElement === '') return false;
+    if (cronElement === '') return;
 
     const tokens = this.parseTokens(cronElement)
 

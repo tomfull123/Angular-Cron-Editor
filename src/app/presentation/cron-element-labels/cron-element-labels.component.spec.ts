@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CronElementLabelsComponent } from './cron-element-labels.component';
+import {CronElementLabelsComponent} from './cron-element-labels.component';
 
 describe('CronElementLabelsComponent', () => {
   let component: CronElementLabelsComponent;
@@ -8,9 +8,9 @@ describe('CronElementLabelsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CronElementLabelsComponent ]
+      declarations: [CronElementLabelsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

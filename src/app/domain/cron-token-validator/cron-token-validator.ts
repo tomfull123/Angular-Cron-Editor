@@ -65,7 +65,7 @@ export class CronTokenValidator {
       const rangeValues = token.value.split('-').filter(v => v !== '');
       if (rangeValues.length !== 2) return false;
       return this.isValidNumberValue(rangeValues[0], minValue, maxValue) &&
-        this.isValidNumberValue(rangeValues[1], minValue, maxValue);
+        this.isValidNumberValue(rangeValues[1], minValue, maxValue) && Number(rangeValues[0]) <= Number(rangeValues[1]);
     }
 
     return this.isValidValue(token.value, minValue, maxValue);
@@ -80,8 +80,7 @@ export class CronTokenValidator {
   }
 
   private static isValidValue(value: string, minValue?: number, maxValue?: number): boolean {
-    if (value === '*') return true;
-    return this.isValidNumberValue(value, minValue, maxValue);
+    return (value === '*') || this.isValidNumberValue(value, minValue, maxValue);
   }
 
 }

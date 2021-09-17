@@ -96,7 +96,6 @@ export class CronDescriptionComponent implements OnInit {
           break;
         default:
           if (t.value.includes('/')) { // Stepped values
-            needsUnitPrefix = false;
             const stepValues = t.value.split('/');
             if (stepValues.length === 2) {
               const rangeString = this.getRangeValuesDescription(stepValues[0], unSteppedValueMap, maxValue);
@@ -104,10 +103,12 @@ export class CronDescriptionComponent implements OnInit {
               if (rangeString !== '*') stepValueString += ` from ${rangeString}`;
               descriptionComponents.push(stepValueString);
             }
-          } else { // Range values
-            descriptionComponents.push(`${needsUnitPrefix ? `${unitName} ` : ''}${this.getRangeValuesDescription(t.value, unSteppedValueMap)}`);
-            needsUnitPrefix = false;
+          } else if (t.value.includes('-')) { // Range values
+            descriptionComponents.push(`every ${needsUnitPrefix ? `${unitName} ` : ''}from ${this.getRangeValuesDescription(t.value, unSteppedValueMap)}`);
+          } else {
+            descriptionComponents.push(`${needsUnitPrefix ? `${unitName} ` : ''}${unSteppedValueMap[t.value] ?? t.value}`);
           }
+          needsUnitPrefix = false;
           break;
       }
     });
@@ -154,7 +155,9 @@ export class CronDescriptionComponent implements OnInit {
     return i + 'th';
   }
 
-  isCronValid() {
+  isCronValid(): boolean {
+    if (!this.cron) return false;
+
     for (let i = 0; i < 5; i++) {
       if (!CronElementParser.isCronElementValid(i, this.cron)) return false;
     }
