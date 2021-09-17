@@ -17,6 +17,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import { DayOfWeekMultiSelectComponent } from './presentation/day-of-week-multi-select/day-of-week-multi-select.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { CronNextTimeComponent } from './presentation/cron-next-time/cron-next-time.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     CronElementModeSelectorComponent,
     MultiSelectComponent,
     CronElementLabelsComponent,
-    DayOfWeekMultiSelectComponent
+    DayOfWeekMultiSelectComponent,
+    CronNextTimeComponent
   ],
   imports: [
     BrowserModule,
