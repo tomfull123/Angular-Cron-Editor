@@ -8,5 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="index" level="application" />
+    <orderEntry type="library" name="jasmine-core" level="project" />
   </component>
 </module>
