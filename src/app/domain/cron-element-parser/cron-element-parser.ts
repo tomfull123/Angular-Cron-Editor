@@ -21,7 +21,8 @@ export class CronElementParser {
     return (!cronElementTokens?.some(t => !t.valid)) ?? false;
   }
 
-  static parseCronElement(cron: string, elementIndex: CronElementIndex): CronElementToken[] | undefined {
+  static parseCronElement(cron: string | undefined, elementIndex: CronElementIndex): CronElementToken[] | undefined {
+    if (cron == null) return undefined;
     const cronElements = cron.split(' ');
 
     if (elementIndex >= cronElements.length) return;

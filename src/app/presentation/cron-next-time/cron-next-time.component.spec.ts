@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CronNextTimeComponent } from './cron-next-time.component';
+import {CronNextTimeComponent} from './cron-next-time.component';
 
 describe('CronNextTimeComponent', () => {
   let component: CronNextTimeComponent;
@@ -8,15 +8,15 @@ describe('CronNextTimeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CronNextTimeComponent ]
+      declarations: [CronNextTimeComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CronNextTimeComponent);
     component = fixture.componentInstance;
-    component.unexpandedNextTimeCount = 5;
+    component.unexpandedNextTimeCount = 7;
     component.currentTime = new Date(2021, 5, 7, 8, 9);
     fixture.detectChanges();
   });
@@ -28,23 +28,79 @@ describe('CronNextTimeComponent', () => {
   it('should be next every minute', () => {
     component.cron = "* * * * *";
     const times = component.getNextTimes();
-    expect(times.length).toBe(5);
+    expect(times.length).toBe(7);
     expect(times[0].toLocaleString()).toBe('07/06/2021, 08:09:00');
     expect(times[1].toLocaleString()).toBe('07/06/2021, 08:10:00');
     expect(times[2].toLocaleString()).toBe('07/06/2021, 08:11:00');
     expect(times[3].toLocaleString()).toBe('07/06/2021, 08:12:00');
     expect(times[4].toLocaleString()).toBe('07/06/2021, 08:13:00');
+    expect(times[5].toLocaleString()).toBe('07/06/2021, 08:14:00');
+    expect(times[6].toLocaleString()).toBe('07/06/2021, 08:15:00');
   });
 
-  it('should be next 5 to 10 minute', () => {
+  it('should be the next 5 to 10 minute', () => {
     component.cron = "5-10 * * * *";
     const times = component.getNextTimes();
-    expect(times.length).toBe(5);
+    expect(times.length).toBe(7);
     expect(times[0].toLocaleString()).toBe('07/06/2021, 08:09:00');
     expect(times[1].toLocaleString()).toBe('07/06/2021, 08:10:00');
     expect(times[2].toLocaleString()).toBe('07/06/2021, 09:05:00');
     expect(times[3].toLocaleString()).toBe('07/06/2021, 09:06:00');
     expect(times[4].toLocaleString()).toBe('07/06/2021, 09:07:00');
+    expect(times[5].toLocaleString()).toBe('07/06/2021, 09:08:00');
+    expect(times[6].toLocaleString()).toBe('07/06/2021, 09:09:00');
+  });
+
+  it('should be the next every 10 minute', () => {
+    component.cron = "*/10 * * * *";
+    const times = component.getNextTimes();
+    expect(times.length).toBe(7);
+    expect(times[0].toLocaleString()).toBe('07/06/2021, 08:10:00');
+    expect(times[1].toLocaleString()).toBe('07/06/2021, 08:20:00');
+    expect(times[2].toLocaleString()).toBe('07/06/2021, 08:30:00');
+    expect(times[3].toLocaleString()).toBe('07/06/2021, 08:40:00');
+    expect(times[4].toLocaleString()).toBe('07/06/2021, 08:50:00');
+    expect(times[5].toLocaleString()).toBe('07/06/2021, 09:00:00');
+    expect(times[6].toLocaleString()).toBe('07/06/2021, 09:10:00');
+  });
+
+  it('should be the next every 10 minute with a 3 minute offset', () => {
+    component.cron = "3/10 * * * *";
+    const times = component.getNextTimes();
+    expect(times.length).toBe(7);
+    expect(times[0].toLocaleString()).toBe('07/06/2021, 08:13:00');
+    expect(times[1].toLocaleString()).toBe('07/06/2021, 08:23:00');
+    expect(times[2].toLocaleString()).toBe('07/06/2021, 08:33:00');
+    expect(times[3].toLocaleString()).toBe('07/06/2021, 08:43:00');
+    expect(times[4].toLocaleString()).toBe('07/06/2021, 08:53:00');
+    expect(times[5].toLocaleString()).toBe('07/06/2021, 09:03:00');
+    expect(times[6].toLocaleString()).toBe('07/06/2021, 09:13:00');
+  });
+
+  it('should be the next 5th minute', () => {
+    component.cron = "5 * * * *";
+    const times = component.getNextTimes();
+    expect(times.length).toBe(7);
+    expect(times[0].toLocaleString()).toBe('07/06/2021, 09:05:00');
+    expect(times[1].toLocaleString()).toBe('07/06/2021, 10:05:00');
+    expect(times[2].toLocaleString()).toBe('07/06/2021, 11:05:00');
+    expect(times[3].toLocaleString()).toBe('07/06/2021, 12:05:00');
+    expect(times[4].toLocaleString()).toBe('07/06/2021, 13:05:00');
+    expect(times[5].toLocaleString()).toBe('07/06/2021, 14:05:00');
+    expect(times[6].toLocaleString()).toBe('07/06/2021, 15:05:00');
+  });
+
+  it('should be the next 5th or 8th minute', () => {
+    component.cron = "5,8 * * * *";
+    const times = component.getNextTimes();
+    expect(times.length).toBe(7);
+    expect(times[0].toLocaleString()).toBe('07/06/2021, 09:05:00');
+    expect(times[1].toLocaleString()).toBe('07/06/2021, 09:08:00');
+    expect(times[2].toLocaleString()).toBe('07/06/2021, 10:05:00');
+    expect(times[3].toLocaleString()).toBe('07/06/2021, 10:08:00');
+    expect(times[4].toLocaleString()).toBe('07/06/2021, 11:05:00');
+    expect(times[5].toLocaleString()).toBe('07/06/2021, 11:08:00');
+    expect(times[6].toLocaleString()).toBe('07/06/2021, 12:05:00');
   });
 
 

@@ -109,7 +109,7 @@ export class CronNextTimeComponent implements OnInit, OnDestroy {
         } else {
           // Non standard cron format
           const firstValueAsNumber = Number(firstValue);
-          values.push(...Array.from(Array(Math.floor((maxValue - firstValueAsNumber) / secondValue)).keys()).map(i => (i * secondValue) + firstValueAsNumber));
+          values.push(...Array.from(Array(Math.ceil((maxValue - firstValueAsNumber) / secondValue)).keys()).map(i => (i * secondValue) + firstValueAsNumber));
         }
       } else if (token.value.includes('-')) { // Range values
         const rangeValues = token.value.split('-');
