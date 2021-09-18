@@ -19,6 +19,7 @@ describe('CronElementParser', () => {
       let tokens = CronElementParser.parseCronElement(CronTestHelper.buildCron('*', i), i);
       expect(tokens?.length).toBe(1);
       expect(tokens![0].value).toBe('*');
+      expect(tokens![0].valid).toBeTrue();
 
       tokens = CronElementParser.parseCronElement(CronTestHelper.buildCron('*/1', i), i);
       expect(tokens?.length).toBe(1);
@@ -80,6 +81,21 @@ describe('CronElementParser', () => {
 
       tokens = CronElementParser.parseCronElement(CronTestHelper.buildCron('/1', i), i);
       expect(tokens?.length).toBe(1);
+      expect(tokens![0].valid).toBeFalse();
+
+      tokens = CronElementParser.parseCronElement(CronTestHelper.buildCron('5-5', i), i);
+      expect(tokens?.length).toBe(1);
+      expect(tokens![0].value).toBe('5-5');
+      expect(tokens![0].valid).toBeTrue();
+
+      tokens = CronElementParser.parseCronElement(CronTestHelper.buildCron('1-6', i), i);
+      expect(tokens?.length).toBe(1);
+      expect(tokens![0].value).toBe('1-6');
+      expect(tokens![0].valid).toBeTrue();
+
+      tokens = CronElementParser.parseCronElement(CronTestHelper.buildCron('6-1', i), i);
+      expect(tokens?.length).toBe(1);
+      expect(tokens![0].value).toBe('6-1');
       expect(tokens![0].valid).toBeFalse();
 
       // Invalid
