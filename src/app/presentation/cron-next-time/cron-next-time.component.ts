@@ -37,6 +37,7 @@ export class CronNextTimeComponent implements OnInit {
       for (const dayOfMonth of dayOfMonthValues) {
         date.setDate(dayOfMonth);
         if (date < this.currentTime && dayOfMonth < this.currentTime.getDate()) continue;
+        if (!dayOfWeekValues.includes(date.getDay())) continue;
         for (const hour of hourValues) {
           date.setHours(hour);
           if (date < this.currentTime && hour < this.currentTime.getHours()) continue;
