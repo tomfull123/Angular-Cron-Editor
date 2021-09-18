@@ -156,13 +156,7 @@ export class CronDescriptionComponent implements OnInit {
   }
 
   isCronValid(): boolean {
-    if (!this.cron) return false;
-
-    for (let i = 0; i < 5; i++) {
-      if (!CronElementParser.isCronElementValid(i, this.cron)) return false;
-    }
-
-    return true;
+    return CronElementParser.isCronValid(this.cron);
   }
 
   getDescriptionClass(elementIndex: CronElementIndex) {

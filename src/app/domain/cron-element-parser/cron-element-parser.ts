@@ -4,6 +4,16 @@ import {CronElementIndex, CronTokenValidator} from "../cron-token-validator/cron
 
 export class CronElementParser {
 
+  static isCronValid(cron?: string): boolean {
+    if (!cron) return false;
+
+    for (let i = 0; i < 5; i++) {
+      if (!this.isCronElementValid(i, cron)) return false;
+    }
+
+    return true;
+  }
+
   static isCronElementValid(elementIndex: CronElementIndex, cron?: string): boolean {
     if (cron == null) return false;
     const cronElementTokens = this.parseCronElement(cron!, elementIndex);

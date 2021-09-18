@@ -60,7 +60,7 @@
         <app-cron-element-mode-selector [(mode)]="dayOfMonthMode"
                                         (modeChange)="refreshCronElement(CronElementIndex.DayOfMonth, $event)"></app-cron-element-mode-selector>
         <app-multi-select class="cron-element-select"
-                          placeholder="Minute(s)"
+                          placeholder="Day(s) of the Month"
                           [inputType]="InputType.Number"
                           [(values)]="dayOfMonthValues"
                           [min]="dayOfMonthMode === CronElementMode.At ? 0 : 1"

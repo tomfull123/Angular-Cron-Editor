@@ -1,1 +1,5 @@
-<p>cron-next-time works!</p>
+<div *ngIf="isCronValid()">
+  <div *ngFor="let time of getNextTimes(); index as i">
+    {{i === 0 ? 'Next' : 'Then'}} at {{time.toLocaleString()}}
+  </div>
+</div>
