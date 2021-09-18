@@ -11,7 +11,7 @@ import {CronElementIndex} from 'src/app/domain/cron-token-validator/cron-token-v
 })
 export class CronEditorComponent implements OnInit {
 
-  private _cron: string = '';
+  private _cron?: string;
   CronElementMode = CronElementMode;
   CronElementIndex = CronElementIndex;
   InputType = InputType;
@@ -19,7 +19,7 @@ export class CronEditorComponent implements OnInit {
   _cronInputCursorPosition = -1
 
   @Input()
-  set cron(cron: string) {
+  set cron(cron: string | undefined) {
     if (this._cron !== cron) {
       this._cron = cron;
       this.cronChange.emit(cron);
@@ -89,7 +89,7 @@ export class CronEditorComponent implements OnInit {
       case 4: // Month
         return CronElementIndex.Month;
       case 5: // Advanced
-        const cronElements = this.cron.split(' ');
+        const cronElements = this.cron!.split(' ');
         let cronLengthTotal = 0;
         for (let i = 0; i < cronElements.length; i++) {
           const element = cronElements[i];
@@ -128,7 +128,7 @@ export class CronEditorComponent implements OnInit {
   }
 
   private getCronElementValues(cronIndex: number): string[] {
-    const cronElement = CronElementParser.parseCronElement(this.cron, cronIndex)
+    const cronElement = CronElementParser.parseCronElement(this.cron!, cronIndex)
       ?.filter(t => t.valid)
       ?.map(t => t.value)
       ?.join('');
@@ -142,7 +142,7 @@ export class CronEditorComponent implements OnInit {
   }
 
   private setCronElementValues(elementIndex: CronElementIndex, values: string[], cronElementMode: CronElementMode) {
-    const cronElements = this.cron.split(' ');
+    const cronElements = this.cron!.split(' ');
 
     if (values.length === 0) {
       cronElements[elementIndex] = '*';
@@ -162,7 +162,7 @@ export class CronEditorComponent implements OnInit {
   }
 
   clearCronElement(elementIndex: CronElementIndex) {
-    const cronElements = this.cron.split(' ');
+    const cronElements = this.cron!.split(' ');
     cronElements[elementIndex] = '*';
     this.cron = cronElements.join(' ');
   }

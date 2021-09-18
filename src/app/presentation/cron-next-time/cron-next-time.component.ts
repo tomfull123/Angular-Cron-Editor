@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {CronElementParser} from "../../domain/cron-element-parser/cron-element-parser";
 import {CronElementIndex, CronTokenValidator} from "../../domain/cron-token-validator/cron-token-validator";
 
@@ -7,13 +7,21 @@ import {CronElementIndex, CronTokenValidator} from "../../domain/cron-token-vali
   templateUrl: './cron-next-time.component.html',
   styleUrls: ['./cron-next-time.component.css']
 })
-export class CronNextTimeComponent implements OnInit {
+export class CronNextTimeComponent implements OnInit, OnDestroy {
+
+  private _currentTime?: Date;
 
   @Input()
   cron?: string;
 
   @Input()
-  currentTime: Date = new Date(Date.now());
+  set currentTime(currentTime: Date) {
+    this._currentTime = currentTime;
+  }
+
+  get currentTime() {
+    return this._currentTime ?? new Date(Date.now())
+  }
 
   @Input()
   expanded = false;
@@ -27,10 +35,25 @@ export class CronNextTimeComponent implements OnInit {
   @Input()
   expandedNextTimeCount = 5;
 
+  nextTimes: Date[] = [];
+  nextTimesInterval?: number;
+
   constructor() {
   }
 
   ngOnInit(): void {
+    this.updateNextTimes();
+    this.nextTimesInterval = setInterval(() => {
+      this.updateNextTimes();
+    }, 1000);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.nextTimesInterval);
+  }
+
+  updateNextTimes() {
+    this.nextTimes = this.getNextTimes();
   }
 
   getNextTimes(): Date[] {

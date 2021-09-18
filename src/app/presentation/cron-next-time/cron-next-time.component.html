@@ -1,5 +1,5 @@
 <div *ngIf="isCronValid()" (click)="expanded = !expanded">
-  <div *ngFor="let time of getNextTimes(); index as i">
+  <div *ngFor="let time of nextTimes; index as i">
     {{i === 0 ? 'next' : 'then'}} at {{time.toLocaleString()}}
   </div>
 </div>
