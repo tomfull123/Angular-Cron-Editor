@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CronElementParser} from "../../domain/cron-element-parser/cron-element-parser";
 import {CronElementIndex, CronTokenValidator} from "../../domain/cron-token-validator/cron-token-validator";
 
@@ -14,6 +14,18 @@ export class CronNextTimeComponent implements OnInit {
 
   @Input()
   currentTime: Date = new Date(Date.now());
+
+  @Input()
+  expanded = false;
+
+  @Output()
+  expandedChange = new EventEmitter<boolean>();
+
+  @Input()
+  unexpandedNextTimeCount = 1;
+
+  @Input()
+  expandedNextTimeCount = 5;
 
   constructor() {
   }
@@ -45,7 +57,7 @@ export class CronNextTimeComponent implements OnInit {
             date.setMinutes(minute);
             if (date < this.currentTime && minute <= this.currentTime.getMinutes()) continue;
             times.push(new Date(date));
-            if (times.length === 5) return times;
+            if (times.length === this.getNextTimeCount()) return times;
           }
         }
       }
@@ -94,5 +106,8 @@ export class CronNextTimeComponent implements OnInit {
     return values.filter(v => v >= minValue);
   }
 
+  private getNextTimeCount(): number {
+    return this.expanded ? this.expandedNextTimeCount : this.unexpandedNextTimeCount;
+  }
 
 }
