@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CronEditorComponent} from "./cron-editor/cron-editor.component";
-import {CronDescriptionComponent} from "./cron-description/cron-description.component";
 import {CronElementModeSelectorComponent} from "./internal/presentation/cron-element-mode-selector/cron-element-mode-selector.component";
 import {MultiSelectComponent} from "./internal/presentation/multi-select/multi-select.component";
 import {CronElementLabelsComponent} from "./internal/presentation/cron-element-labels/cron-element-labels.component";
@@ -16,6 +15,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {CronDescriptionComponent} from "./cron-description/cron-description.component";
 
 
 @NgModule({

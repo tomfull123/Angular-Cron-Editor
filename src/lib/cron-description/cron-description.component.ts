@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {CronElementIndex} from '../internal/domain/cron-token-validator/cron-token-validator';
 import {CronElementParser} from "../internal/domain/cron-element-parser/cron-element-parser";
 import {CronElementToken} from "../internal/domain/cron-element-token/cron-element-token";
@@ -8,7 +8,7 @@ import {CronElementToken} from "../internal/domain/cron-element-token/cron-eleme
   templateUrl: './cron-description.component.html',
   styleUrls: ['./cron-description.component.css']
 })
-export class CronDescriptionComponent implements OnInit {
+export class CronDescriptionComponent {
 
   static WEEKDAY_MAP = {
     '0': 'Sunday',
@@ -44,9 +44,6 @@ export class CronDescriptionComponent implements OnInit {
   CronElementIndex = CronElementIndex;
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
   buildMinuteDescription(): string {
@@ -106,7 +103,7 @@ export class CronDescriptionComponent implements OnInit {
           } else if (t.value.includes('-')) { // Range values
             descriptionComponents.push(`every ${needsUnitPrefix ? `${unitName} ` : ''}from ${this.getRangeValuesDescription(t.value, unSteppedValueMap)}`);
           } else {
-            descriptionComponents.push(`${needsUnitPrefix ? `${unitName} ` : ''}${unSteppedValueMap[t.value] ?? t.value}`);
+            descriptionComponents.push(`${needsUnitPrefix ? `${unitName} ` : ''}${this.getRangeValuesDescription(t.value, unSteppedValueMap)}`);
           }
           needsUnitPrefix = false;
           break;
@@ -137,7 +134,8 @@ export class CronDescriptionComponent implements OnInit {
       return `${mappedRangeStart} through ${mappedRangeEnd}`;
     }
 
-    return unSteppedValueMap[tokenValue] ?? tokenValue;
+    const valueAsNumber = Number(tokenValue);
+    return unSteppedValueMap[tokenValue] ?? (isNaN(valueAsNumber) ? tokenValue : valueAsNumber);
   }
 
   private ordinalSuffixOf(i: number) {

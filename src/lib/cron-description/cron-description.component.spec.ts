@@ -1,5 +1,4 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {CronDescriptionComponent} from './cron-description.component';
 
 describe('CronDescriptionComponent', () => {

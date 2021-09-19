@@ -57,6 +57,7 @@ export class CronNextTimeComponent implements OnInit, OnDestroy {
   }
 
   getNextTimes(): Date[] {
+    if (!this.isCronValid()) return [];
     if (this.cron == null) return [];
     const times: Date[] = [];
 
@@ -66,24 +67,29 @@ export class CronNextTimeComponent implements OnInit, OnDestroy {
     const dayOfMonthValues = this.getValues(CronElementIndex.DayOfMonth);
     const monthValues = this.getValues(CronElementIndex.Month);
 
-    for (const month of monthValues) {
-      const date = new Date(this.currentTime.getFullYear(), month - 1, 1, 0, 0, 0, 0);
-      if (date < this.currentTime && month <= this.currentTime.getMonth()) continue;
-      for (const dayOfMonth of dayOfMonthValues) {
-        date.setDate(dayOfMonth);
-        if (date < this.currentTime && dayOfMonth < this.currentTime.getDate()) continue;
-        if (!dayOfWeekValues.includes(date.getDay())) continue;
-        for (const hour of hourValues) {
-          date.setHours(hour);
-          if (date < this.currentTime && hour < this.currentTime.getHours()) continue;
-          for (const minute of minuteValues) {
-            date.setMinutes(minute);
-            if (date < this.currentTime && minute <= this.currentTime.getMinutes()) continue;
-            times.push(new Date(date));
-            if (times.length === this.getNextTimeCount()) return times;
+    let year = this.currentTime.getFullYear();
+
+    while (true) {
+      for (const month of monthValues) {
+        const date = new Date(year, month - 1, 1, 0, 0, 0, 0);
+        if (date < this.currentTime && month <= this.currentTime.getMonth()) continue;
+        for (const dayOfMonth of dayOfMonthValues) {
+          date.setDate(dayOfMonth);
+          if (date < this.currentTime && dayOfMonth < this.currentTime.getDate()) continue;
+          if (!dayOfWeekValues.includes(date.getDay())) continue;
+          for (const hour of hourValues) {
+            date.setHours(hour);
+            if (date < this.currentTime && hour < this.currentTime.getHours()) continue;
+            for (const minute of minuteValues) {
+              date.setMinutes(minute);
+              if (date < this.currentTime && minute <= this.currentTime.getMinutes()) continue;
+              times.push(new Date(date));
+              if (times.length === this.getNextTimeCount()) return times;
+            }
           }
         }
       }
+      year++;
     }
 
     return times;
@@ -126,7 +132,7 @@ export class CronNextTimeComponent implements OnInit, OnDestroy {
       }
     });
 
-    return values.filter(v => v >= minValue);
+    return [...new Set(values.filter(v => v >= minValue).sort((a, b) => a - b))];
   }
 
   private getNextTimeCount(): number {

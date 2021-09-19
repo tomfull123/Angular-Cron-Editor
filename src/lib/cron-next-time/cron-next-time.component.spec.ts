@@ -129,5 +129,43 @@ describe('CronNextTimeComponent', () => {
     expect(times[6].toLocaleString()).toBe('18/10/2021, 00:00:00');
   });
 
+  it('should be the next January every year', () => {
+    component.cron = "0 0 1 1 *";
+    const times = component.getNextTimes();
+    expect(times.length).toBe(7);
+    expect(times[0].toLocaleString()).toBe('01/01/2022, 00:00:00');
+    expect(times[1].toLocaleString()).toBe('01/01/2023, 00:00:00');
+    expect(times[2].toLocaleString()).toBe('01/01/2024, 00:00:00');
+    expect(times[3].toLocaleString()).toBe('01/01/2025, 00:00:00');
+    expect(times[4].toLocaleString()).toBe('01/01/2026, 00:00:00');
+    expect(times[5].toLocaleString()).toBe('01/01/2027, 00:00:00');
+    expect(times[6].toLocaleString()).toBe('01/01/2028, 00:00:00');
+  });
+
+  it('should ignore duplicate values', () => {
+    component.cron = "1,1,2,2,3 * * * *";
+    const times = component.getNextTimes();
+    expect(times.length).toBe(7);
+    expect(times[0].toLocaleString()).toBe('07/06/2021, 09:01:00');
+    expect(times[1].toLocaleString()).toBe('07/06/2021, 09:02:00');
+    expect(times[2].toLocaleString()).toBe('07/06/2021, 09:03:00');
+    expect(times[3].toLocaleString()).toBe('07/06/2021, 10:01:00');
+    expect(times[4].toLocaleString()).toBe('07/06/2021, 10:02:00');
+    expect(times[5].toLocaleString()).toBe('07/06/2021, 10:03:00');
+    expect(times[6].toLocaleString()).toBe('07/06/2021, 11:01:00');
+  });
+
+  it('should sort unordered values', () => {
+    component.cron = "3,2,1,49,12 * * * *";
+    const times = component.getNextTimes();
+    expect(times.length).toBe(7);
+    expect(times[0].toLocaleString()).toBe('07/06/2021, 08:12:00');
+    expect(times[1].toLocaleString()).toBe('07/06/2021, 08:49:00');
+    expect(times[2].toLocaleString()).toBe('07/06/2021, 09:01:00');
+    expect(times[3].toLocaleString()).toBe('07/06/2021, 09:02:00');
+    expect(times[4].toLocaleString()).toBe('07/06/2021, 09:03:00');
+    expect(times[5].toLocaleString()).toBe('07/06/2021, 09:12:00');
+    expect(times[6].toLocaleString()).toBe('07/06/2021, 09:49:00');
+  });
 
 });
