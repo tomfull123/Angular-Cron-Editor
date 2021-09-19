@@ -103,5 +103,31 @@ describe('CronNextTimeComponent', () => {
     expect(times[6].toLocaleString()).toBe('07/06/2021, 12:05:00');
   });
 
+  it('should be the next 3rd day', () => {
+    component.cron = "0 0 */3 * *";
+    const times = component.getNextTimes();
+    expect(times.length).toBe(7);
+    expect(times[0].toLocaleString()).toBe('09/06/2021, 00:00:00');
+    expect(times[1].toLocaleString()).toBe('12/06/2021, 00:00:00');
+    expect(times[2].toLocaleString()).toBe('15/06/2021, 00:00:00');
+    expect(times[3].toLocaleString()).toBe('18/06/2021, 00:00:00');
+    expect(times[4].toLocaleString()).toBe('21/06/2021, 00:00:00');
+    expect(times[5].toLocaleString()).toBe('24/06/2021, 00:00:00');
+    expect(times[6].toLocaleString()).toBe('27/06/2021, 00:00:00');
+  });
+
+  it('should be the next 3rd day if its a monday', () => {
+    component.cron = "0 0 */3 * 1";
+    const times = component.getNextTimes();
+    expect(times.length).toBe(7);
+    expect(times[0].toLocaleString()).toBe('21/06/2021, 00:00:00');
+    expect(times[1].toLocaleString()).toBe('12/07/2021, 00:00:00');
+    expect(times[2].toLocaleString()).toBe('09/08/2021, 00:00:00');
+    expect(times[3].toLocaleString()).toBe('30/08/2021, 00:00:00');
+    expect(times[4].toLocaleString()).toBe('06/09/2021, 00:00:00');
+    expect(times[5].toLocaleString()).toBe('27/09/2021, 00:00:00');
+    expect(times[6].toLocaleString()).toBe('18/10/2021, 00:00:00');
+  });
+
 
 });

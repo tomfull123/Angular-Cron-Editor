@@ -105,7 +105,7 @@ export class CronNextTimeComponent implements OnInit, OnDestroy {
         const firstValue = steppedValues[0];
         const secondValue = Number(steppedValues[1]);
         if (firstValue === '*') {
-          values.push(...Array.from(Array(maxValue / secondValue).keys()).map(i => i * secondValue));
+          values.push(...Array.from(Array(Math.ceil(maxValue / secondValue)).keys()).map(i => i * secondValue));
         } else {
           // Non standard cron format
           const firstValueAsNumber = Number(firstValue);
