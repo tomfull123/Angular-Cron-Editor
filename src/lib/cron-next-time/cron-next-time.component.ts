@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {CronElementIndex, CronTokenValidator} from "../internal/domain/cron-token-validator/cron-token-validator";
 import {CronElementParser} from "../internal/domain/cron-element-parser/cron-element-parser";
 
@@ -7,7 +7,7 @@ import {CronElementParser} from "../internal/domain/cron-element-parser/cron-ele
   templateUrl: './cron-next-time.component.html',
   styleUrls: ['./cron-next-time.component.css']
 })
-export class CronNextTimeComponent implements OnInit, OnDestroy {
+export class CronNextTimeComponent implements OnInit, OnChanges, OnDestroy {
 
   private _currentTime?: Date;
 
@@ -46,6 +46,12 @@ export class CronNextTimeComponent implements OnInit, OnDestroy {
     this.nextTimesInterval = setInterval(() => {
       this.updateNextTimes();
     }, 1000);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.cron) {
+      this.updateNextTimes();
+    }
   }
 
   ngOnDestroy() {
