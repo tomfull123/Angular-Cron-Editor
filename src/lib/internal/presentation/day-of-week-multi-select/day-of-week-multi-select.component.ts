@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatCheckboxChange} from "@angular/material/checkbox";
 
 @Component({
-  selector: 'app-day-of-week-multi-select',
+  selector: 'lib-day-of-week-multi-select',
   templateUrl: './day-of-week-multi-select.component.html',
   styleUrls: ['./day-of-week-multi-select.component.css']
 })

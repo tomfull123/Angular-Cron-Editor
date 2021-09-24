@@ -4,7 +4,7 @@ import {CronElementParser} from "../internal/domain/cron-element-parser/cron-ele
 import {CronElementToken} from "../internal/domain/cron-element-token/cron-element-token";
 
 @Component({
-  selector: 'app-cron-description',
+  selector: 'cron-description',
   templateUrl: './cron-description.component.html',
   styleUrls: ['./cron-description.component.css']
 })

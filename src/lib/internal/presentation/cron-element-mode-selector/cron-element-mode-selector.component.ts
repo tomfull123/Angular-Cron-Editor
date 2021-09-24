@@ -6,7 +6,7 @@ export enum CronElementMode {
 }
 
 @Component({
-  selector: 'app-cron-element-mode-selector',
+  selector: 'lib-cron-element-mode-selector',
   templateUrl: './cron-element-mode-selector.component.html',
   styleUrls: ['./cron-element-mode-selector.component.css']
 })

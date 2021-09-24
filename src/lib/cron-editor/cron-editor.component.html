@@ -4,14 +4,14 @@
     <div class="tab-container">
       <button mat-raised-button class="clear-button" (click)="clearCronElement(CronElementIndex.Minute)">Clear</button>
       <div class="cron-element-controls">
-        <app-cron-element-mode-selector [(mode)]="minuteMode"
-                                        (modeChange)="refreshCronElement(CronElementIndex.Minute, $event)"></app-cron-element-mode-selector>
-        <app-multi-select class="cron-element-select"
+        <lib-cron-element-mode-selector [(mode)]="minuteMode"
+                                        (modeChange)="refreshCronElement(CronElementIndex.Minute, $event)"></lib-cron-element-mode-selector>
+        <lib-multi-select class="cron-element-select"
                           placeholder="Minute(s)"
                           [inputType]="InputType.Number"
                           [(values)]="minuteValues"
                           [min]="minuteMode === CronElementMode.At ? 0 : 1"
-                          [max]="minuteMode === CronElementMode.At ? 59 : undefined"></app-multi-select>
+                          [max]="minuteMode === CronElementMode.At ? 59 : undefined"></lib-multi-select>
       </div>
     </div>
   </mat-tab>
@@ -20,14 +20,14 @@
     <div class="tab-container">
       <button mat-raised-button class="clear-button" (click)="clearCronElement(CronElementIndex.Hour)">Clear</button>
       <div class="cron-element-controls">
-        <app-cron-element-mode-selector [(mode)]="hourMode"
-                                        (modeChange)="refreshCronElement(CronElementIndex.Hour, $event)"></app-cron-element-mode-selector>
-        <app-multi-select class="cron-element-select"
+        <lib-cron-element-mode-selector [(mode)]="hourMode"
+                                        (modeChange)="refreshCronElement(CronElementIndex.Hour, $event)"></lib-cron-element-mode-selector>
+        <lib-multi-select class="cron-element-select"
                           placeholder="Hour(s)"
                           [inputType]="InputType.Number"
                           [(values)]="hourValues"
                           [min]="hourMode === CronElementMode.At ? 0 : 1"
-                          [max]="hourMode === CronElementMode.At ? 23 : undefined"></app-multi-select>
+                          [max]="hourMode === CronElementMode.At ? 23 : undefined"></lib-multi-select>
       </div>
     </div>
   </mat-tab>
@@ -37,17 +37,17 @@
       <button mat-raised-button class="clear-button" (click)="clearCronElement(CronElementIndex.DayOfWeek)">Clear
       </button>
       <div class="cron-element-controls">
-        <app-cron-element-mode-selector [(mode)]="dayOfWeekMode"
-                                        (modeChange)="refreshCronElement(CronElementIndex.DayOfWeek, $event)"></app-cron-element-mode-selector>
-        <app-multi-select class="cron-element-select"
+        <lib-cron-element-mode-selector [(mode)]="dayOfWeekMode"
+                                        (modeChange)="refreshCronElement(CronElementIndex.DayOfWeek, $event)"></lib-cron-element-mode-selector>
+        <lib-multi-select class="cron-element-select"
                           *ngIf="dayOfWeekMode === CronElementMode.Every"
                           placeholder="Day(s) of the Week"
                           [inputType]="InputType.Number"
                           [(values)]="dayOfWeekValues"
-                          [min]="1"></app-multi-select>
-        <app-day-of-week-multi-select class="cron-element-select"
+                          [min]="1"></lib-multi-select>
+        <lib-day-of-week-multi-select class="cron-element-select"
                                       *ngIf="dayOfWeekMode === CronElementMode.At"
-                                      [(selectedValues)]="dayOfWeekValues"></app-day-of-week-multi-select>
+                                      [(selectedValues)]="dayOfWeekValues"></lib-day-of-week-multi-select>
       </div>
     </div>
   </mat-tab>
@@ -57,14 +57,14 @@
       <button mat-raised-button class="clear-button" (click)="clearCronElement(CronElementIndex.DayOfMonth)">Clear
       </button>
       <div class="cron-element-controls">
-        <app-cron-element-mode-selector [(mode)]="dayOfMonthMode"
-                                        (modeChange)="refreshCronElement(CronElementIndex.DayOfMonth, $event)"></app-cron-element-mode-selector>
-        <app-multi-select class="cron-element-select"
+        <lib-cron-element-mode-selector [(mode)]="dayOfMonthMode"
+                                        (modeChange)="refreshCronElement(CronElementIndex.DayOfMonth, $event)"></lib-cron-element-mode-selector>
+        <lib-multi-select class="cron-element-select"
                           placeholder="Day(s) of the Month"
                           [inputType]="InputType.Number"
                           [(values)]="dayOfMonthValues"
                           [min]="dayOfMonthMode === CronElementMode.At ? 0 : 1"
-                          [max]="dayOfMonthMode === CronElementMode.At ? 31 : undefined"></app-multi-select>
+                          [max]="dayOfMonthMode === CronElementMode.At ? 31 : undefined"></lib-multi-select>
       </div>
     </div>
   </mat-tab>
@@ -73,14 +73,14 @@
     <div class="tab-container">
       <button mat-raised-button class="clear-button" (click)="clearCronElement(CronElementIndex.Month)">Clear</button>
       <div class="cron-element-controls">
-        <app-cron-element-mode-selector [(mode)]="monthMode"
-                                        (modeChange)="refreshCronElement(CronElementIndex.Month, $event)"></app-cron-element-mode-selector>
-        <app-multi-select class="cron-element-select"
+        <lib-cron-element-mode-selector [(mode)]="monthMode"
+                                        (modeChange)="refreshCronElement(CronElementIndex.Month, $event)"></lib-cron-element-mode-selector>
+        <lib-multi-select class="cron-element-select"
                           placeholder="Month(s)"
                           [inputType]="InputType.Number"
                           [(values)]="monthValues"
                           [min]="monthMode === CronElementMode.At ? 0 : 1"
-                          [max]="monthMode === CronElementMode.At ? 12 : undefined"></app-multi-select>
+                          [max]="monthMode === CronElementMode.At ? 12 : undefined"></lib-multi-select>
       </div>
     </div>
   </mat-tab>
@@ -94,8 +94,8 @@
                (blur)="resetCursorPos()"/>
       </mat-form-field>
       <div>
-        <app-cron-element-labels class="cron-element-labels" [cron]="cron"
-                                 [selectedCronElementIndex]="selectedCronElementIndex"></app-cron-element-labels>
+        <lib-cron-element-labels class="cron-element-labels" [cron]="cron"
+                                 [selectedCronElementIndex]="selectedCronElementIndex"></lib-cron-element-labels>
       </div>
     </div>
   </mat-tab>

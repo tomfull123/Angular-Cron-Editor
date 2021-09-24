@@ -5,7 +5,7 @@ import { InputType } from '../internal/presentation/multi-select/multi-select.co
 import {CronElementParser} from "../internal/domain/cron-element-parser/cron-element-parser";
 
 @Component({
-  selector: 'app-cron-editor',
+  selector: 'cron-editor',
   templateUrl: './cron-editor.component.html',
   styleUrls: ['./cron-editor.component.css']
 })

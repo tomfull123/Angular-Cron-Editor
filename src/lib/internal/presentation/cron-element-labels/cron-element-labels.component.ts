@@ -3,7 +3,7 @@ import {CronElementParser} from "../../domain/cron-element-parser/cron-element-p
 import {CronElementIndex} from '../../domain/cron-token-validator/cron-token-validator';
 
 @Component({
-  selector: 'app-cron-element-labels',
+  selector: 'lib-cron-element-labels',
   templateUrl: './cron-element-labels.component.html',
   styleUrls: ['./cron-element-labels.component.css']
 })

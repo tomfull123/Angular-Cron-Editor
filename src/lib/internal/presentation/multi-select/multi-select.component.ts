@@ -8,7 +8,7 @@ export enum InputType {
 }
 
 @Component({
-  selector: 'app-multi-select',
+  selector: 'lib-multi-select',
   templateUrl: './multi-select.component.html',
   styleUrls: ['./multi-select.component.css']
 })

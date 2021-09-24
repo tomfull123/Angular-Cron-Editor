@@ -3,7 +3,7 @@ import {CronElementIndex, CronTokenValidator} from "../internal/domain/cron-toke
 import {CronElementParser} from "../internal/domain/cron-element-parser/cron-element-parser";
 
 @Component({
-  selector: 'app-cron-next-time',
+  selector: 'cron-next-time',
   templateUrl: './cron-next-time.component.html',
   styleUrls: ['./cron-next-time.component.css']
 })
