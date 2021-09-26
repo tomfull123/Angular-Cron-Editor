@@ -6,9 +6,15 @@ To install:
 
 `npm i ngx-angular-cron-editor`
 
-Add material theming to your `angular.json`'s styles
+Add material theming:
+
+`angular.json`'s styles:
 
 `./node_modules/@angular/material/prebuilt-themes/indigo-pink.css`
+
+Inside the `index.html`'s head tags:
+
+`<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">`
 
 ## Example
 
