@@ -1,11 +1,20 @@
 {
   "name": "ngx-angular-cron-editor",
+  "description": "",
   "version": "0.0.4",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/tomfull123/Angular-Cron-Editor"
   },
+  "bugs": {
+    "url": "https://github.com/tomfull123/Angular-Cron-Editor/issues"
+  },
+  "keywords": [
+    "angular",
+    "cron",
+    "cron-expression"
+  ],
   "peerDependencies": {
     "@angular/common": "^12.2.6",
     "@angular/core": "^12.2.6",
