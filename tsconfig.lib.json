@@ -11,7 +11,12 @@
     "lib": [
       "dom",
       "es2018"
-    ]
+    ],
+    "paths": {
+      "@angular/*": [
+        "./node_modules/@angular/*"
+      ]
+    }
   },
   "exclude": [
     "src/test.ts",
