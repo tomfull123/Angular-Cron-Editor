@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { CronElementIndex } from '../internal/domain/cron-token-validator/cron-token-validator';
-import { CronElementMode } from '../internal/presentation/cron-element-mode-selector/cron-element-mode-selector.component';
-import { InputType } from '../internal/presentation/multi-select/multi-select.component';
+import {CronElementIndex} from '../internal/domain/cron-token-validator/cron-token-validator';
+import {CronElementMode} from '../internal/presentation/cron-element-mode-selector/cron-element-mode-selector.component';
+import {InputType} from '../internal/presentation/multi-select/multi-select.component';
 import {CronElementParser} from "../internal/domain/cron-element-parser/cron-element-parser";
 
 @Component({
@@ -125,6 +125,7 @@ export class CronEditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateSelectedCronElementIndexChange();
+    this.updateCronElementModes();
   }
 
   private getCronElementValues(cronIndex: number): string[] {
@@ -179,5 +180,21 @@ export class CronEditorComponent implements OnInit {
 
   updateSelectedCronElementIndexChange() {
     this.selectedCronElementIndexChange.emit(this.selectedCronElementIndex);
+  }
+
+  private updateCronElementModes() {
+    this.minuteMode = this.getCronElementMode(CronElementIndex.Minute);
+    this.hourMode = this.getCronElementMode(CronElementIndex.Hour);
+    this.dayOfMonthMode = this.getCronElementMode(CronElementIndex.DayOfMonth);
+    this.monthMode = this.getCronElementMode(CronElementIndex.Month);
+    this.dayOfWeekMode = this.getCronElementMode(CronElementIndex.DayOfWeek);
+  }
+
+  private getCronElementMode(elementIndex: CronElementIndex): CronElementMode {
+    const values = CronElementParser.parseCronElement(this.cron!, elementIndex)
+      ?.filter(t => t.valid)
+      ?.map(t => t.value);
+    if (values == null || values.length === 0 || values[0] === '*' || values[0].includes('/')) return CronElementMode.Every;
+    return CronElementMode.At;
   }
 }
