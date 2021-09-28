@@ -3,6 +3,9 @@
   "description": "",
   "version": "0.0.5",
   "license": "MIT",
+  "scripts": {
+    "test-headless": "ng test --browsers=ChromeHeadless --watch=false"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/tomfull123/Angular-Cron-Editor"
