@@ -1,0 +1,37 @@
+name: Test
+
+# Controls when the workflow will run
+on:
+  pull_request:
+  push:
+    branches: ['*']
+    tags-ignore: ['*']
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup NPM Cache
+        uses: actions/cache@v2
+        with:
+          path: '~/.npm'
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.5
+          
+      - name: Run npm install and test
+        run: |
+          npm install
+          npm run test-headless --watch=false
